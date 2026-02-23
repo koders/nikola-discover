@@ -5,34 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discover.lv — Elektronika un Sadzīves Tehnika</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* ───── Reset & Base ───── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #f5f6f8;
+      --bg: #f4f4f4;
       --surface: #ffffff;
-      --text: #1a1a2e;
+      --text: #333333;
       --text-secondary: #6b7280;
-      --accent: #4f46e5;
-      --accent-hover: #4338ca;
-      --accent-light: #eef2ff;
-      --green: #10b981;
-      --green-light: #ecfdf5;
+      --accent: #178ABF;
+      --accent-hover: #126e99;
+      --accent-light: #e6f3f9;
+      --green: #7ab648;
+      --red: #e80000;
       --orange: #f59e0b;
-      --radius: 16px;
+      --radius: 14px;
       --radius-sm: 10px;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.05);
       --shadow-md: 0 4px 16px rgba(0,0,0,.08);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,.1);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
       --transition: .2s ease;
+      --sidebar-w: 272px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -49,74 +50,56 @@
       padding: 0 24px;
     }
 
-    /* ───── Top Bar ───── */
-    .top-bar {
-      background: var(--text);
-      color: #fff;
-      font-size: 13px;
-      padding: 8px 0;
-    }
-
-    .top-bar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .top-bar a { color: rgba(255,255,255,.7); transition: color var(--transition); }
-    .top-bar a:hover { color: #fff; }
-
-    .top-bar__left { display: flex; align-items: center; gap: 20px; }
-    .top-bar__right { display: flex; align-items: center; gap: 16px; }
-
-    .top-bar__delivery {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(16,185,129,.15);
-      color: #6ee7b7;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-
     /* ───── Header ───── */
     .header {
       background: var(--surface);
-      padding: 16px 0;
+      padding: 14px 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06), var(--shadow-sm);
     }
 
     .header .container {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
     }
 
     .logo {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      color: var(--accent);
       flex-shrink: 0;
+      line-height: 1;
     }
 
-    .logo span { color: var(--text); }
+    .logo__main {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+      display: block;
+    }
+
+    .logo__main .logo-accent { color: var(--green); }
+
+    .logo__sub {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 1px;
+      display: block;
+    }
 
     .search {
       flex: 1;
-      max-width: 540px;
       position: relative;
+      max-width: 600px;
     }
 
     .search input {
       width: 100%;
-      padding: 12px 20px 12px 48px;
+      padding: 14px 20px 14px 52px;
       border: 2px solid #e5e7eb;
       border-radius: 50px;
       font-size: 15px;
@@ -128,12 +111,12 @@
 
     .search input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(79,70,229,.1);
+      box-shadow: 0 0 0 4px rgba(23,138,191,.12);
     }
 
-    .search svg {
+    .search__icon {
       position: absolute;
-      left: 18px;
+      left: 20px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-secondary);
@@ -143,8 +126,9 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-shrink: 0;
+      margin-left: auto;
     }
 
     .header-btn {
@@ -162,12 +146,9 @@
     }
 
     .header-btn:hover { background: var(--accent-light); color: var(--accent); }
-
     .header-btn svg { width: 22px; height: 22px; }
 
-    .header-btn--cart {
-      position: relative;
-    }
+    .header-btn--cart { position: relative; }
 
     .cart-badge {
       position: absolute;
@@ -185,104 +166,146 @@
       justify-content: center;
     }
 
-    /* ───── Category Nav ───── */
-    .cat-nav {
+    /* ───── Main Content: Sidebar + Hero ───── */
+    .main-content {
+      padding: 20px 0 0;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ── Catalog Sidebar ── */
+    .catalog-menu {
       background: var(--surface);
-      border-top: 1px solid #f0f0f0;
-      overflow-x: auto;
-      scrollbar-width: none;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
 
-    .cat-nav::-webkit-scrollbar { display: none; }
-
-    .cat-nav .container {
+    .catalog-menu__header {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 20px;
       display: flex;
-      gap: 4px;
-      padding-top: 4px;
-      padding-bottom: 4px;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .3px;
     }
 
-    .cat-nav a {
-      padding: 10px 16px;
+    .catalog-menu__list {
+      list-style: none;
+    }
+
+    .catalog-menu__item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
       font-size: 14px;
       font-weight: 500;
+      color: var(--text);
+      border-bottom: 1px solid #f0f0f2;
+      transition: background var(--transition), color var(--transition), padding-left var(--transition);
+    }
+
+    .catalog-menu__item:last-child a { border-bottom: none; }
+
+    .catalog-menu__item a:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding-left: 26px;
+    }
+
+    .catalog-menu__item svg {
+      width: 18px;
+      height: 18px;
       color: var(--text-secondary);
-      white-space: nowrap;
-      border-radius: var(--radius-sm);
-      transition: background var(--transition), color var(--transition);
+      flex-shrink: 0;
+      transition: color var(--transition);
     }
 
-    .cat-nav a:hover { background: var(--accent-light); color: var(--accent); }
+    .catalog-menu__item a:hover svg { color: var(--accent); }
 
-    /* ───── Hero ───── */
-    .hero {
-      padding: 32px 0 0;
+    .catalog-menu__item .cat-arrow {
+      margin-left: auto;
+      width: 14px;
+      height: 14px;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity var(--transition), transform var(--transition);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .catalog-menu__item a:hover .cat-arrow {
+      opacity: 1;
+      transform: translateX(0);
     }
 
-    .hero-card {
+    /* ── Hero Banner / Carousel ── */
+    .hero-banner {
       border-radius: var(--radius);
-      padding: 48px 44px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #7ab648 0%, #5a9a2e 100%);
+      display: flex;
+      align-items: stretch;
       color: #fff;
+      box-shadow: var(--shadow-md);
+      min-height: 100%;
+    }
+
+    .hero-banner__content {
+      padding: 48px 44px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      min-height: 340px;
+      justify-content: center;
+      flex: 1;
       position: relative;
-      overflow: hidden;
-      transition: transform var(--transition), box-shadow var(--transition);
+      z-index: 2;
     }
 
-    .hero-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-
-    .hero-card--primary {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-    }
-
-    .hero-card--secondary {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    }
-
-    .hero-card__tag {
+    .hero-banner__tag {
       display: inline-block;
-      background: rgba(255,255,255,.2);
+      background: rgba(255,255,255,.18);
       backdrop-filter: blur(8px);
-      padding: 5px 14px;
+      padding: 5px 16px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: .5px;
+      letter-spacing: .8px;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       width: fit-content;
     }
 
-    .hero-card h2 {
-      font-size: 32px;
+    .hero-banner h2 {
+      font-size: 34px;
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 12px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      max-width: 420px;
     }
 
-    .hero-card p {
+    .hero-banner p {
       font-size: 16px;
-      opacity: .85;
-      margin-bottom: 24px;
+      opacity: .8;
+      margin-bottom: 28px;
       max-width: 380px;
+      line-height: 1.6;
     }
 
-    .hero-card__btn {
+    .hero-banner__btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       background: #fff;
       color: var(--text);
-      padding: 12px 28px;
+      padding: 14px 32px;
       border-radius: 50px;
       font-size: 15px;
       font-weight: 600;
@@ -290,17 +313,45 @@
       transition: transform var(--transition), box-shadow var(--transition);
     }
 
-    .hero-card__btn:hover {
+    .hero-banner__btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,.2);
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
     }
 
-    .hero-card__emoji {
+    .hero-banner__visual {
       position: absolute;
-      right: 40px;
-      top: 40px;
-      font-size: 80px;
-      opacity: .3;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 130px;
+      opacity: .18;
+      z-index: 1;
+    }
+
+    .hero-banner__dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 3;
+    }
+
+    .hero-banner__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.35);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), width var(--transition);
+    }
+
+    .hero-banner__dot--active {
+      background: #fff;
+      width: 24px;
+      border-radius: 4px;
     }
 
     /* ───── Section Headings ───── */
@@ -312,7 +363,7 @@
     }
 
     .section-header h2 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
     }
 
@@ -328,55 +379,8 @@
 
     .section-header a:hover { gap: 8px; }
 
-    /* ───── Categories Grid ───── */
-    .categories { padding: 48px 0 0; }
-
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 16px;
-    }
-
-    .cat-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 28px 20px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .cat-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .cat-card__icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 14px;
-      background: var(--accent-light);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-    }
-
-    .cat-card__name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .cat-card__count {
-      font-size: 12px;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-
     /* ───── Products Grid ───── */
-    .products { padding: 48px 0 0; }
+    .products { padding: 40px 0 0; }
 
     .products-grid {
       display: grid;
@@ -391,6 +395,8 @@
       box-shadow: var(--shadow-sm);
       transition: transform var(--transition), box-shadow var(--transition);
       position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
     .product-card:hover {
@@ -409,8 +415,8 @@
       z-index: 2;
     }
 
-    .product-card__badge--sale { background: #fef2f2; color: #ef4444; }
-    .product-card__badge--new { background: var(--accent-light); color: var(--accent); }
+    .product-card__badge--sale { background: #fef2f2; color: var(--red); }
+    .product-card__badge--new { background: #eef6e6; color: var(--green); }
     .product-card__badge--hot { background: #fff7ed; color: #f59e0b; }
 
     .product-card__image {
@@ -420,8 +426,13 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      font-size: 64px;
       position: relative;
+    }
+
+    .product-card__image img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
     }
 
     .product-card__wishlist {
@@ -442,11 +453,16 @@
 
     .product-card__wishlist:hover { color: #ef4444; }
 
-    .product-card__body { padding: 20px; }
+    .product-card__body {
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
 
     .product-card__category {
-      font-size: 12px;
-      font-weight: 500;
+      font-size: 11px;
+      font-weight: 600;
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: .5px;
@@ -454,7 +470,7 @@
     }
 
     .product-card__title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       line-height: 1.4;
       margin-bottom: 12px;
@@ -468,11 +484,11 @@
       display: flex;
       align-items: baseline;
       gap: 10px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .product-card__price {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: var(--text);
     }
@@ -484,22 +500,20 @@
     }
 
     .product-card__installment {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--green);
       font-weight: 500;
     }
 
-    .product-card__actions {
-      margin-top: 16px;
-    }
+    .product-card__actions { margin-top: auto; padding-top: 14px; }
 
     .btn-add {
       width: 100%;
-      padding: 12px;
+      padding: 11px;
       border-radius: var(--radius-sm);
       background: var(--accent);
       color: #fff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -513,80 +527,41 @@
       transform: translateY(-1px);
     }
 
-    /* ───── Benefits ───── */
-    .benefits {
-      padding: 48px 0;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .benefit {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .benefit__icon {
-      width: 52px;
-      height: 52px;
-      margin: 0 auto 14px;
-      background: var(--accent-light);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-    }
-
-    .benefit__title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .benefit__text {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
     /* ───── Footer ───── */
     .footer {
-      background: var(--text);
+      background: #333;
       color: rgba(255,255,255,.7);
-      padding: 56px 0 0;
+      padding: 48px 0 0;
+      margin-top: 48px;
     }
 
     .footer-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
       gap: 40px;
-      padding-bottom: 40px;
+      padding-bottom: 36px;
       border-bottom: 1px solid rgba(255,255,255,.1);
     }
 
     .footer h3 {
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .footer p { font-size: 14px; line-height: 1.7; }
 
-    .footer-brand .logo {
-      margin-bottom: 14px;
+    .footer-brand .logo__main {
+      margin-bottom: 4px;
       font-size: 24px;
     }
 
-    .footer ul { list-style: none; }
+    .footer-brand .logo__sub {
+      margin-bottom: 14px;
+    }
 
+    .footer ul { list-style: none; }
     .footer ul li { margin-bottom: 10px; }
 
     .footer ul a {
@@ -604,8 +579,24 @@
       font-size: 14px;
     }
 
+    .footer-contact-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: .6;
+    }
+
+    .footer-legal {
+      font-size: 13px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      line-height: 1.6;
+      opacity: .5;
+    }
+
     .footer-bottom {
-      padding: 24px 0;
+      padding: 20px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -622,27 +613,33 @@
 
     /* ───── Responsive ───── */
     @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .categories-grid { grid-template-columns: repeat(3, 1fr); }
-      .products-grid { grid-template-columns: repeat(3, 1fr); }
-      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .main-grid { grid-template-columns: 240px 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-banner h2 { font-size: 28px; }
     }
 
     @media (max-width: 768px) {
       .header .container { flex-wrap: wrap; }
       .search { order: 3; max-width: 100%; flex-basis: 100%; }
-      .hero-card { min-height: 260px; padding: 32px 28px; }
-      .hero-card h2 { font-size: 24px; }
-      .categories-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .catalog-menu {
+        display: none; /* collapse on mobile; could be toggled via JS */
+      }
+
+      .hero-banner { min-height: 280px; }
+      .hero-banner__content { padding: 32px 28px; }
+      .hero-banner h2 { font-size: 24px; }
+
       .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .cat-nav a { padding: 8px 12px; font-size: 13px; }
     }
 
     @media (max-width: 480px) {
-      .categories-grid { grid-template-columns: repeat(2, 1fr); }
       .products-grid { grid-template-columns: 1fr; }
-      .benefits-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .header-actions { gap: 2px; }
       .header-btn { padding: 8px 8px; }
@@ -651,40 +648,20 @@
 </head>
 <body>
 
-  <!-- ───── Top Bar ───── -->
-  <div class="top-bar">
-    <div class="container">
-      <div class="top-bar__left">
-        <span class="top-bar__delivery">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 18h1a2 2 0 1 0 4 0h4a2 2 0 1 0 4 0h1"/><path d="M1 12V7a1 1 0 0 1 1-1h12v10"/><path d="M14 6h4l3 4v6h-3"/></svg>
-          Bezmaksas piegāde Rīgā
-        </span>
-        <a href="#">Veikali</a>
-        <a href="#">Par mums</a>
-      </div>
-      <div class="top-bar__right">
-        <a href="#">Tālr: 28 816 377</a>
-        <a href="#">LV</a>
-        <a href="#">RU</a>
-      </div>
-    </div>
-  </div>
-
   <!-- ───── Header ───── -->
   <header class="header">
     <div class="container">
-      <a href="#" class="logo">discover<span>.lv</span></a>
+      <a href="#" class="logo">
+        <span class="logo__main">disc<span class="logo-accent">o</span>ver<span>.lv</span></span>
+        <span class="logo__sub">internet shop</span>
+      </a>
 
       <div class="search">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <svg class="search__icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="text" placeholder="Meklēt produktus...">
       </div>
 
       <div class="header-actions">
-        <button class="header-btn">
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Vēlmes
-        </button>
         <button class="header-btn">
           <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Ieiet
@@ -698,94 +675,89 @@
     </div>
   </header>
 
-  <!-- ───── Category Nav ───── -->
-  <nav class="cat-nav">
+  <!-- ───── Main: Sidebar + Hero Banner ───── -->
+  <section class="main-content">
     <div class="container">
-      <a href="#">Telefoni</a>
-      <a href="#">Datori</a>
-      <a href="#">Televizori</a>
-      <a href="#">Audio</a>
-      <a href="#">Foto & Video</a>
-      <a href="#">Spēļu konsoles</a>
-      <a href="#">Sadzīves tehnika</a>
-      <a href="#">Klimata tehnika</a>
-      <a href="#">Droni</a>
-      <a href="#">Sports</a>
-      <a href="#">Dārza tehnika</a>
-      <a href="#">Pulksteņi</a>
-      <a href="#">Drošības sistēmas</a>
-    </div>
-  </nav>
+      <div class="main-grid">
 
-  <!-- ───── Hero ───── -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <a href="#" class="hero-card hero-card--primary">
-          <span class="hero-card__emoji">&#128241;</span>
-          <span class="hero-card__tag">Laba cena</span>
-          <h2>Jaunākie viedtālruņi ar līdz 30% atlaidi</h2>
-          <p>Izpēti mūsu jaunākos piedāvājumus un ietaupi ar mēneša maksājumiem.</p>
-          <span class="hero-card__btn">
-            Apskatīt piedāvājumus
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-        <a href="#" class="hero-card hero-card--secondary">
-          <span class="hero-card__emoji">&#10052;&#65039;</span>
-          <span class="hero-card__tag">Sezona</span>
-          <h2>Klimata tehnika — gatavs vasarai</h2>
-          <p>Kondicionieri un ventilatori ar profesionālu uzstādīšanu.</p>
-          <span class="hero-card__btn">
-            Skatīt katalogā
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
+        <!-- Catalog Menu Sidebar -->
+        <nav class="catalog-menu">
+          <div class="catalog-menu__header">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            Preču katalogs
+          </div>
+          <ul class="catalog-menu__list">
+            <li class="catalog-menu__item">
+              <a href="#">
+                <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                Īpašie piedāvājumi
+                <svg class="cat-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </li>
+            <li class="catalog-menu__item">
+              <a href="#">
+                <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2v6m0 4v2m0 4v4M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m4 0h2m4 0h4M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/></svg>
+                Elektronika
+                <svg class="cat-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </li>
+            <li class="catalog-menu__item">
+              <a href="#">
+                <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                Datori un biroja tehnika
+                <svg class="cat-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </li>
+            <li class="catalog-menu__item">
+              <a href="#">
+                <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>
+                Sadzīves tehnika un klimats
+                <svg class="cat-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </li>
+            <li class="catalog-menu__item">
+              <a href="#">
+                <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Mājai un remontam
+                <svg class="cat-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </li>
+            <li class="catalog-menu__item">
+              <a href="#">
+                <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 7h-3a2 2 0 0 1-2-2V2"/><path d="M9 18a4 4 0 0 1-4-4V4a2 2 0 0 1 2-2h7l5 5v7a4 4 0 0 1-4 4H9z"/><path d="M3 15v2a2 2 0 0 0 2 2h2"/></svg>
+                Mēbeles
+                <svg class="cat-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </li>
+            <li class="catalog-menu__item">
+              <a href="#">
+                <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+                Sports, atpūta un hobiji
+                <svg class="cat-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-  <!-- ───── Categories ───── -->
-  <section class="categories">
-    <div class="container">
-      <div class="section-header">
-        <h2>Kategorijas</h2>
-        <a href="#">
-          Visas kategorijas
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="categories-grid">
-        <a href="#" class="cat-card">
-          <div class="cat-card__icon">&#128241;</div>
-          <div class="cat-card__name">Telefoni</div>
-          <div class="cat-card__count">248 preces</div>
-        </a>
-        <a href="#" class="cat-card">
-          <div class="cat-card__icon">&#128187;</div>
-          <div class="cat-card__name">Datori</div>
-          <div class="cat-card__count">312 preces</div>
-        </a>
-        <a href="#" class="cat-card">
-          <div class="cat-card__icon">&#128250;</div>
-          <div class="cat-card__name">Televizori</div>
-          <div class="cat-card__count">156 preces</div>
-        </a>
-        <a href="#" class="cat-card">
-          <div class="cat-card__icon">&#127911;</div>
-          <div class="cat-card__name">Audio</div>
-          <div class="cat-card__count">89 preces</div>
-        </a>
-        <a href="#" class="cat-card">
-          <div class="cat-card__icon">&#127918;</div>
-          <div class="cat-card__name">Spēles</div>
-          <div class="cat-card__count">134 preces</div>
-        </a>
-        <a href="#" class="cat-card">
-          <div class="cat-card__icon">&#9203;</div>
-          <div class="cat-card__name">Pulksteņi</div>
-          <div class="cat-card__count">67 preces</div>
-        </a>
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+          <div class="hero-banner__content">
+            <span class="hero-banner__tag">Laba cena</span>
+            <h2>Jaunākie viedtālruņi ar līdz 30% atlaidi</h2>
+            <p>Izpēti mūsu jaunākos piedāvājumus un ietaupi ar mēneša maksājumiem.</p>
+            <a href="#" class="hero-banner__btn">
+              Apskatīt piedāvājumus
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="hero-banner__visual">&#128241;</div>
+          <div class="hero-banner__dots">
+            <button class="hero-banner__dot hero-banner__dot--active"></button>
+            <button class="hero-banner__dot"></button>
+            <button class="hero-banner__dot"></button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -794,7 +766,7 @@
   <section class="products">
     <div class="container">
       <div class="section-header">
-        <h2>Laba Cena</h2>
+        <h2>Īpašie piedāvājumi</h2>
         <a href="#">
           Visi piedāvājumi
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -803,21 +775,20 @@
       <div class="products-grid">
 
         <div class="product-card">
-          <span class="product-card__badge product-card__badge--sale">-25%</span>
+          <span class="product-card__badge product-card__badge--sale">Laba cena!</span>
           <div class="product-card__image">
-            <span>&#9749;</span>
+            <img src="https://www.discover.lv/userfiles/t_obj/bfoto-46187.jpg" alt="Jura Impressa Z9">
             <button class="product-card__wishlist">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
           </div>
           <div class="product-card__body">
             <div class="product-card__category">Sadzīves tehnika</div>
-            <div class="product-card__title">De'Longhi Magnifica S kafijas automāts</div>
+            <div class="product-card__title">Jura Impressa Z9 One Touch TFT Piano Black</div>
             <div class="product-card__pricing">
-              <span class="product-card__price">&euro;349</span>
-              <span class="product-card__price-old">&euro;465</span>
+              <span class="product-card__price">&euro;799</span>
             </div>
-            <div class="product-card__installment">vai no &euro;29/mēn.</div>
+            <div class="product-card__installment">vai no &euro;79/mēn.</div>
             <div class="product-card__actions">
               <button class="btn-add">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -830,43 +801,18 @@
         <div class="product-card">
           <span class="product-card__badge product-card__badge--new">Jaunums</span>
           <div class="product-card__image">
-            <span>&#128247;</span>
-            <button class="product-card__wishlist">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-          </div>
-          <div class="product-card__body">
-            <div class="product-card__category">Foto & Video</div>
-            <div class="product-card__title">Canon EOS R50 bezspoguļa kamera</div>
-            <div class="product-card__pricing">
-              <span class="product-card__price">&euro;789</span>
-            </div>
-            <div class="product-card__installment">vai no &euro;66/mēn.</div>
-            <div class="product-card__actions">
-              <button class="btn-add">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                Pievienot grozam
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <span class="product-card__badge product-card__badge--hot">Populārs</span>
-          <div class="product-card__image">
-            <span>&#128241;</span>
+            <img src="https://www.discover.lv/userfiles/t_obj/bfoto-58696.jpg" alt="Xiaomi Redmi Note 14">
             <button class="product-card__wishlist">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
           </div>
           <div class="product-card__body">
             <div class="product-card__category">Telefoni</div>
-            <div class="product-card__title">Samsung Galaxy S24 Ultra 256GB</div>
+            <div class="product-card__title">Xiaomi Redmi Note 14 Dual 6/128GB Lime Green</div>
             <div class="product-card__pricing">
-              <span class="product-card__price">&euro;1 149</span>
-              <span class="product-card__price-old">&euro;1 319</span>
+              <span class="product-card__price">&euro;157</span>
             </div>
-            <div class="product-card__installment">vai no &euro;96/mēn.</div>
+            <div class="product-card__installment">vai no &euro;15/mēn.</div>
             <div class="product-card__actions">
               <button class="btn-add">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -877,44 +823,20 @@
         </div>
 
         <div class="product-card">
-          <span class="product-card__badge product-card__badge--sale">-20%</span>
+          <span class="product-card__badge product-card__badge--sale">Laba cena!</span>
           <div class="product-card__image">
-            <span>&#127744;</span>
+            <img src="https://www.discover.lv/userfiles/t_obj/bfoto-57123.jpg" alt="Sony Alpha A7">
             <button class="product-card__wishlist">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
           </div>
           <div class="product-card__body">
-            <div class="product-card__category">Klimata tehnika</div>
-            <div class="product-card__title">Mitsubishi kondicionieris 3.5kW</div>
+            <div class="product-card__category">Foto tehnika</div>
+            <div class="product-card__title">Sony Alpha A7 (ILCE-7) Body</div>
             <div class="product-card__pricing">
-              <span class="product-card__price">&euro;699</span>
-              <span class="product-card__price-old">&euro;875</span>
+              <span class="product-card__price">&euro;419</span>
             </div>
-            <div class="product-card__installment">vai no &euro;58/mēn.</div>
-            <div class="product-card__actions">
-              <button class="btn-add">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                Pievienot grozam
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card__image">
-            <span>&#128187;</span>
-            <button class="product-card__wishlist">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-          </div>
-          <div class="product-card__body">
-            <div class="product-card__category">Datori</div>
-            <div class="product-card__title">Apple MacBook Air 15" M3 8/256GB</div>
-            <div class="product-card__pricing">
-              <span class="product-card__price">&euro;1 399</span>
-            </div>
-            <div class="product-card__installment">vai no &euro;117/mēn.</div>
+            <div class="product-card__installment">vai no &euro;42/mēn.</div>
             <div class="product-card__actions">
               <button class="btn-add">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -927,19 +849,18 @@
         <div class="product-card">
           <span class="product-card__badge product-card__badge--hot">Populārs</span>
           <div class="product-card__image">
-            <span>&#9203;</span>
+            <img src="https://www.discover.lv/userfiles/t_obj/bfoto-52022.jpg" alt="Wood's Roma">
             <button class="product-card__wishlist">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
           </div>
           <div class="product-card__body">
-            <div class="product-card__category">Pulksteņi</div>
-            <div class="product-card__title">Apple Watch Series 9 GPS 45mm</div>
+            <div class="product-card__category">Klimata tehnika</div>
+            <div class="product-card__title">Wood's Roma portatīvais kondicionieris</div>
             <div class="product-card__pricing">
-              <span class="product-card__price">&euro;429</span>
-              <span class="product-card__price-old">&euro;479</span>
+              <span class="product-card__price">&euro;298</span>
             </div>
-            <div class="product-card__installment">vai no &euro;36/mēn.</div>
+            <div class="product-card__installment">vai no &euro;30/mēn.</div>
             <div class="product-card__actions">
               <button class="btn-add">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -949,83 +870,6 @@
           </div>
         </div>
 
-        <div class="product-card">
-          <span class="product-card__badge product-card__badge--new">Jaunums</span>
-          <div class="product-card__image">
-            <span>&#128681;</span>
-            <button class="product-card__wishlist">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-          </div>
-          <div class="product-card__body">
-            <div class="product-card__category">Droni</div>
-            <div class="product-card__title">DJI Mini 4 Pro Fly More Combo</div>
-            <div class="product-card__pricing">
-              <span class="product-card__price">&euro;959</span>
-            </div>
-            <div class="product-card__installment">vai no &euro;80/mēn.</div>
-            <div class="product-card__actions">
-              <button class="btn-add">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                Pievienot grozam
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <span class="product-card__badge product-card__badge--sale">-15%</span>
-          <div class="product-card__image">
-            <span>&#127911;</span>
-            <button class="product-card__wishlist">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-          </div>
-          <div class="product-card__body">
-            <div class="product-card__category">Audio</div>
-            <div class="product-card__title">Sony WH-1000XM5 austiņas</div>
-            <div class="product-card__pricing">
-              <span class="product-card__price">&euro;289</span>
-              <span class="product-card__price-old">&euro;339</span>
-            </div>
-            <div class="product-card__installment">vai no &euro;24/mēn.</div>
-            <div class="product-card__actions">
-              <button class="btn-add">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                Pievienot grozam
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ───── Benefits ───── -->
-  <section class="benefits">
-    <div class="container">
-      <div class="benefits-grid">
-        <div class="benefit">
-          <div class="benefit__icon">&#128666;</div>
-          <div class="benefit__title">Bezmaksas piegāde</div>
-          <div class="benefit__text">Piegāde bez maksas Rīgā pasūtījumiem virs &euro;50</div>
-        </div>
-        <div class="benefit">
-          <div class="benefit__icon">&#128179;</div>
-          <div class="benefit__title">Mēneša maksājumi</div>
-          <div class="benefit__text">Ērta apmaksa pa daļām ar 0% pirmo iemaksu</div>
-        </div>
-        <div class="benefit">
-          <div class="benefit__icon">&#128274;</div>
-          <div class="benefit__title">Garantija</div>
-          <div class="benefit__text">Oficiāla ražotāja garantija visām precēm</div>
-        </div>
-        <div class="benefit">
-          <div class="benefit__icon">&#128222;</div>
-          <div class="benefit__title">Atbalsts</div>
-          <div class="benefit__text">Profesionālas konsultācijas pa tālr. 28 816 377</div>
-        </div>
       </div>
     </div>
   </section>
@@ -1035,8 +879,12 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo">discover<span style="color:rgba(255,255,255,.5)">.lv</span></div>
+          <div class="logo">
+            <span class="logo__main" style="color:#fff">disc<span class="logo-accent">o</span>ver<span style="color:rgba(255,255,255,.4)">.lv</span></span>
+            <span class="logo__sub" style="color:rgba(255,255,255,.35)">internet shop</span>
+          </div>
           <p>Elektronika un sadzīves tehnika ar plašu sortimentu un izdevīgiem nosacījumiem kopš 2005. gada.</p>
+          <p class="footer-legal">SIA "Discover" | Reģ. Nr. 40203XXXXXX | PVN Nr. LV40203XXXXXX</p>
         </div>
         <div>
           <h3>Informācija</h3>
@@ -1051,19 +899,31 @@
         <div>
           <h3>Kategorijas</h3>
           <ul>
-            <li><a href="#">Telefoni</a></li>
-            <li><a href="#">Datori</a></li>
-            <li><a href="#">Televizori</a></li>
+            <li><a href="#">Elektronika</a></li>
+            <li><a href="#">Datori un biroja tehnika</a></li>
             <li><a href="#">Sadzīves tehnika</a></li>
-            <li><a href="#">Klimata tehnika</a></li>
+            <li><a href="#">Mājai un remontam</a></li>
+            <li><a href="#">Mēbeles</a></li>
           </ul>
         </div>
         <div>
           <h3>Kontakti</h3>
-          <div class="footer-contact-item">&#128222; 28 816 377</div>
-          <div class="footer-contact-item">&#128222; 28 816 577</div>
-          <div class="footer-contact-item">&#128231; info@discover.lv</div>
-          <div class="footer-contact-item">&#128205; Rīga, Latvija</div>
+          <div class="footer-contact-item">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            28 816 377
+          </div>
+          <div class="footer-contact-item">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            28 816 577
+          </div>
+          <div class="footer-contact-item">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@discover.lv
+          </div>
+          <div class="footer-contact-item">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Rīga, Latvija
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
